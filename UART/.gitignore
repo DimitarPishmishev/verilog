@@ -1,0 +1,13 @@
+# Ignore the specific output directory you created
+out/
+
+# Ignore common Vivado/Xilinx generated logs and journals
+*.log
+*.jou
+*.pb
+*.wdb
+*.str
+
+# Ignore Vivado intermediate simulation directories
+.Xil/
+xsim.dir/

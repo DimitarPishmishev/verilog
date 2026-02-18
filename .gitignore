@@ -1,0 +1,18 @@
+
+# Vivado Generated Junk
+*.jou
+*.log
+*.pb
+*.wdb
+*.str
+.Xil/
+*.xpr
+*.os
+
+# Simulation Outputs
+out/
+xsim.dir/
+
+# OS Junk
+.DS_Store
+Thumbs.db
