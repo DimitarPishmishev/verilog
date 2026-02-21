@@ -34,12 +34,17 @@ if exist "test\src\scripts\run.bat" (
     echo [WARNING] Could not find run.bat in test\src\scripts\
 )
 
+if exist "test\setup.ps1" (
+    copy "test\setup.ps1" "%projName%\" >nul
+) else (
+    echo [WARNING] Could not find setup.ps1 in test\
+)
+
 if exist "test\src\scripts\open_waves.bat" (
     copy "test\src\scripts\open_waves.bat" "%projName%\src\scripts\" >nul
 ) else (
     echo [WARNING] Could not find open_waves.bat in test\src\scripts\
 )
-
 
 REM --- 4. Create a default filelist.f ---
 echo // Add your RTL and TB file paths here > "%projName%\files_tb.f"
