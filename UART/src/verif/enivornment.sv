@@ -4,8 +4,8 @@ class environment extends uvm_env;
     virtual interface_uart vif_u1;
     virtual interface_uart vif_u2;
 
-        agent agent1;
-        agent agent2;
+    agent agent1;
+    agent agent2;
     
         function void build_phase(uvm_phase phase);
             super.build_phase(phase);
@@ -21,6 +21,11 @@ class environment extends uvm_env;
     
     function new(string name, uvm_component parent);
         super.new(name, parent);
+    endfunction
+
+    function void connect_phase(uvm_phase phase);
+        
+
     endfunction
 
 
