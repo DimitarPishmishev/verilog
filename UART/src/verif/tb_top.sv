@@ -6,38 +6,19 @@ interface_uart intf_u1_h;
 interface_uart intf_u2_h;
 
 
-uart_top u_uart_top_0(
-    .clk      (intf_u1_h.clk),
-    .rst      (intf_u1_h.rst),
-    .tx_data  (intf_u1_h.tx_data),
-    .tx_start (intf_u1_h.tx_start),
-    .tx_pin   (intf_u1_h.tx_pin),   
-    .tx_done  (intf_u1_h.tx_done),
-    .rx_pin   (intf_u2_h.tx_pin),   
-    .rx_data  (intf_u1_h.rx_data),
-    .rx_done  (intf_u1_h.rx_done)
-);
-
-
-uart_top u_uart_top_1(
-    .clk      (intf_u2_h.clk),
-    .rst      (intf_u2_h.rst),
-    .tx_data  (intf_u2_h.tx_data),
-    .tx_start (intf_u2_h.tx_start),
-    .tx_pin   (intf_u2_h.tx_pin),   
-    .tx_done  (intf_u2_h.tx_done),
-    .rx_pin   (intf_u1_h.tx_pin),  
-    .rx_data  (intf_u2_h.rx_data),
-    .rx_done  (intf_u2_h.rx_done)
+dut #(.CLK_FREQ(50000000), .BAUD_RATE(115200)) u_dut (
+    .uart_if0(intf_u1_h),
+    .uart_if1(intf_u2_h)
 );
 always #10 intf_u1_h.clk = ~intf_u1_h.clk;
 assign intf_u2_h.clk = intf_u1_h.clk;
 
 initial begin
+    uvm_config_db#(interface_uart)::set(null, "base_test", "uart_if", intf_u1_h);
+    uvm_config_db#(interface_uart)::set(null, "base_test", "uart_if", intf_u2_h);
+    #10;
 
-
-
-
+    run_test ("base_test");
 
 
 
