@@ -77,7 +77,7 @@ if errorlevel 1 (
 
 :: 7. Elaborate (xelab)
 echo [2/3] Elaborating...
-call xelab -debug typical -top "%TOP_MODULE%" -snapshot my_snapshot -L uvm
+call xelab -debug typical -top "%TOP_MODULE%" -snapshot my_snapshot -L uvm -timescale 1ns/1ps
 if errorlevel 1 (
     echo Elaboration failed!
     exit /b 1

@@ -2,7 +2,7 @@ class base_test extends uvm_test;
 
     `uvm_component_utils(base_test)
 
-    enivornment env_h;
+    environment env_h;
     virtual interface_uart vif_u1;
     virtual interface_uart vif_u2;
 
@@ -29,9 +29,18 @@ class base_test extends uvm_test;
 
 
     task run_phase(uvm_phase phase);
+    base_sequence seq;
         phase.raise_objection(this);
-        super.run_phase(phase);
-  
+        seq = base_sequence::type_id::create("seq");
+
+        fork
+            seq.start(env_h.agent1.seqr);
+            begin
+                #50ms;
+                `uvm_fatal(get_type_name(), "TEST TIMEOUT after 50ms!")
+            end
+        join_any
+        disable fork;
 
         phase.drop_objection(this);
         `uvm_info(get_type_name(), "base_test run_phase complete", UVM_LOW)
